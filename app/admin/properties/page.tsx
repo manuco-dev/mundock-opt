@@ -14,8 +14,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Switch } from '@/components/ui/switch';
 import { Label } from '@/components/ui/label';
 import { Checkbox } from '@/components/ui/checkbox';
-import AlternativeImageUpload from '@/components/AlternativeImageUpload';
-import ApartmentImageUpload from '@/components/ApartmentImageUpload';
+import PropertyImageUpload from '@/components/PropertyImageUpload';
 import EmbeddedGoogleMap, { extractEmbedUrl } from '@/components/EmbeddedGoogleMap';
 import { IProperty } from '@/lib/db/models/Property';
 import { Pencil, Trash2, Plus, Eye, Bed, Bath, Waves, Home } from 'lucide-react';
@@ -665,39 +664,20 @@ export default function AdminPropertiesPage() {
               
               <div>
                 <Label className="mb-2 block">Imágenes</Label>
-                {formData.type === 'apartment' ? (
-                  <ApartmentImageUpload 
-                    value={formData.images.map(img => img.url)} 
-                    onChange={(urls) => {
-                      // Convertir URLs a formato de imagen
-                      const images = urls.map(url => ({ url }));
-                      handleImageUpload(images);
-                    }} 
-                    onRemove={(url) => {
-                      const newImages = formData.images.filter(img => img.url !== url);
-                      handleImageUpload(newImages);
-                    }}
-                    onUploadStart={() => console.log('Iniciando carga de imagen...')}
-                    onUploadComplete={(url) => console.log('Imagen cargada:', url)}
-                    onUploadError={(error) => console.error('Error al cargar imagen:', error)}
-                  />
-                ) : (
-                  <AlternativeImageUpload 
-                    value={formData.images.map(img => img.url)} 
-                    onChange={(urls) => {
-                      // Convertir URLs a formato de imagen
-                      const images = urls.map(url => ({ url }));
-                      handleImageUpload(images);
-                    }} 
-                    onRemove={(url) => {
-                      const newImages = formData.images.filter(img => img.url !== url);
-                      handleImageUpload(newImages);
-                    }}
-                    onUploadStart={() => console.log('Iniciando carga de imagen...')}
-                    onUploadComplete={(url) => console.log('Imagen cargada:', url)}
-                    onUploadError={(error) => console.error('Error al cargar imagen:', error)}
-                  />
-                )}
+                <PropertyImageUpload 
+                  value={formData.images.map(img => img.url)} 
+                  onChange={(urls) => {
+                    // Convertir URLs a formato de imagen
+                    const images = urls.map(url => ({ url }));
+                    handleImageUpload(images);
+                  }} 
+                  onRemove={(url) => {
+                    const newImages = formData.images.filter(img => img.url !== url);
+                    handleImageUpload(newImages);
+                  }}
+                  useCloudinary={true}
+                  folder="properties"
+                />
               </div>
             </div>
           </div>
@@ -937,39 +917,20 @@ export default function AdminPropertiesPage() {
               
               <div>
                 <Label className="mb-2 block">Imágenes</Label>
-                {formData.type === 'apartment' ? (
-                  <ApartmentImageUpload 
-                    value={formData.images.map(img => img.url)} 
-                    onChange={(urls) => {
-                      // Convertir URLs a formato de imagen
-                      const images = urls.map(url => ({ url }));
-                      handleImageUpload(images);
-                    }} 
-                    onRemove={(url) => {
-                      const newImages = formData.images.filter(img => img.url !== url);
-                      handleImageUpload(newImages);
-                    }}
-                    onUploadStart={() => console.log('Iniciando carga de imagen...')}
-                    onUploadComplete={(url) => console.log('Imagen cargada:', url)}
-                    onUploadError={(error) => console.error('Error al cargar imagen:', error)}
-                  />
-                ) : (
-                  <AlternativeImageUpload 
-                    value={formData.images.map(img => img.url)} 
-                    onChange={(urls) => {
-                      // Convertir URLs a formato de imagen
-                      const images = urls.map(url => ({ url }));
-                      handleImageUpload(images);
-                    }} 
-                    onRemove={(url) => {
-                      const newImages = formData.images.filter(img => img.url !== url);
-                      handleImageUpload(newImages);
-                    }}
-                    onUploadStart={() => console.log('Iniciando carga de imagen...')}
-                    onUploadComplete={(url) => console.log('Imagen cargada:', url)}
-                    onUploadError={(error) => console.error('Error al cargar imagen:', error)}
-                  />
-                )}
+                <PropertyImageUpload 
+                  value={formData.images.map(img => img.url)} 
+                  onChange={(urls) => {
+                    // Convertir URLs a formato de imagen
+                    const images = urls.map(url => ({ url }));
+                    handleImageUpload(images);
+                  }} 
+                  onRemove={(url) => {
+                    const newImages = formData.images.filter(img => img.url !== url);
+                    handleImageUpload(newImages);
+                  }}
+                  useCloudinary={true}
+                  folder="properties"
+                />
               </div>
             </div>
           </div>
