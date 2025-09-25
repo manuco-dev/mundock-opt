@@ -1,49 +1,41 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Alert, AlertDescription } from '@/components/ui/alert';
-import { Loader2, Lock, User } from 'lucide-react';
+import { Loader2, User, Lock } from 'lucide-react';
+import { useAuth } from '@/hooks/use-auth';
 
 export default function AdminLogin() {
   const [formData, setFormData] = useState({
     username: '',
     password: ''
   });
-  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
+  const { login, isLoading, isAuthenticated } = useAuth();
   const router = useRouter();
+
+  // Redirigir si ya está autenticado
+  useEffect(() => {
+    if (isAuthenticated) {
+      router.push('/admin/dashboard');
+    }
+  }, [isAuthenticated, router]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsLoading(true);
     setError('');
 
-    try {
-      const response = await fetch('/api/auth/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
-
-      const data = await response.json();
-
-      if (response.ok) {
-        // Redirigir al dashboard
-        router.push('/admin/dashboard');
-      } else {
-        setError(data.error || 'Error al iniciar sesión');
-      }
-    } catch (error) {
-      setError('Error de conexión. Intenta nuevamente.');
-    } finally {
-      setIsLoading(false);
+    const result = await login(formData.username, formData.password);
+    
+    if (result.success) {
+      router.push('/admin/dashboard');
+    } else {
+      setError(result.error || 'Error al iniciar sesión');
     }
   };
 

@@ -7,7 +7,15 @@ export async function GET(request: NextRequest) {
   try {
     await dbConnect();
     
-    const token = request.cookies.get('admin-token')?.value;
+    // Obtener token desde cookie o header Authorization
+    let token = request.cookies.get('admin-token')?.value;
+    
+    if (!token) {
+      const authHeader = request.headers.get('Authorization');
+      if (authHeader && authHeader.startsWith('Bearer ')) {
+        token = authHeader.substring(7);
+      }
+    }
 
     if (!token) {
       return NextResponse.json(

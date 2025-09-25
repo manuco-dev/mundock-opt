@@ -9,7 +9,15 @@ export function middleware(request: NextRequest) {
 
   // Solo aplicar middleware a rutas admin (excepto login)
   if (request.nextUrl.pathname.startsWith('/admin') && !request.nextUrl.pathname.startsWith('/admin/login')) {
-    const token = request.cookies.get('admin-token')?.value;
+    // Obtener token desde cookie o header Authorization
+    let token = request.cookies.get('admin-token')?.value;
+    
+    if (!token) {
+      const authHeader = request.headers.get('Authorization');
+      if (authHeader && authHeader.startsWith('Bearer ')) {
+        token = authHeader.substring(7);
+      }
+    }
 
     if (!token) {
       // Redirigir a login si no hay token

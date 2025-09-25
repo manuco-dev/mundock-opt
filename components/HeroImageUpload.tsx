@@ -155,6 +155,12 @@ export default function HeroImageUpload({
       {/* Image Upload Section */}
       <div className="space-y-2">
         <label className="text-sm font-medium text-gray-700">Imagen Hero</label>
+        <div className="bg-blue-50 border border-blue-200 rounded-md p-3 mb-3">
+          <p className="text-xs text-blue-700">
+            💡 <strong>Sugerencia:</strong> Para mejorar la velocidad de carga, convierte tu imagen a formato WebP antes de subirla. 
+            Puedes usar herramientas online como ChatGPT o convertidores gratuitos.
+          </p>
+        </div>
         <div
           className={`border-2 border-dashed rounded-lg p-6 text-center cursor-pointer transition-colors ${
             isDragging
@@ -187,6 +193,11 @@ export default function HeroImageUpload({
       {/* Video Upload Section */}
       <div className="space-y-2">
         <label className="text-sm font-medium text-gray-700">Video Hero (Opcional)</label>
+        <div className="bg-blue-50 border border-blue-200 rounded-md p-3 mb-3">
+          <p className="text-xs text-blue-700">
+            💡 <strong>Sugerencia:</strong> Para videos más ligeros, considera convertir a WebM o comprimir el archivo antes de subirlo.
+          </p>
+        </div>
         <div
           className={`border-2 border-dashed rounded-lg p-6 text-center cursor-pointer transition-colors ${
             isDragging

@@ -26,7 +26,9 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Switch } from '@/components/ui/switch';
-import ReviewFileUpload from '@/components/ReviewFileUpload';
+import ReviewBlobUpload from '@/components/ReviewBlobUpload';
+import { useAuth } from '@/hooks/use-auth';
+import AuthGuard from '@/components/AuthGuard';
 
 interface Review {
   _id: string;
@@ -58,7 +60,7 @@ interface User {
 }
 
 export default function AdminReviews() {
-  const [user, setUser] = useState<User | null>(null);
+  const { user, logout, isAuthenticated, isLoading: authLoading } = useAuth();
   const [reviews, setReviews] = useState<Review[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isUploading, setIsUploading] = useState(false);
@@ -82,11 +84,18 @@ export default function AdminReviews() {
   
   const router = useRouter();
 
-  // Verificar autenticación al cargar
+  // Redirigir si no está autenticado
   useEffect(() => {
-    checkAuth();
-    fetchReviews();
-  }, []);
+    if (!authLoading && !isAuthenticated) {
+      router.push('/admin/login');
+      return;
+    }
+    
+    if (isAuthenticated) {
+      fetchReviews();
+      setIsLoading(false);
+    }
+  }, [isAuthenticated, authLoading, router]);
 
   // Limpiar mensajes después de 5 segundos
   useEffect(() => {
@@ -98,22 +107,6 @@ export default function AdminReviews() {
       return () => clearTimeout(timer);
     }
   }, [error, success]);
-
-  const checkAuth = async () => {
-    try {
-      const response = await fetch('/api/auth/verify');
-      if (response.ok) {
-        const data = await response.json();
-        setUser(data.user);
-      } else {
-        router.push('/admin/login');
-      }
-    } catch (error) {
-      router.push('/admin/login');
-    } finally {
-      setIsLoading(false);
-    }
-  };
 
   const fetchReviews = async () => {
     try {
@@ -130,12 +123,8 @@ export default function AdminReviews() {
   };
 
   const handleLogout = async () => {
-    try {
-      await fetch('/api/auth/logout', { method: 'POST' });
-      router.push('/admin/login');
-    } catch (error) {
-      console.error('Error al cerrar sesión:', error);
-    }
+    await logout();
+    router.push('/admin/login');
   };
 
   const handleCreateReview = async () => {
@@ -254,7 +243,8 @@ export default function AdminReviews() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <AuthGuard>
+      <div className="min-h-screen bg-gray-50">
       {/* Header */}
       <header className="bg-white shadow-sm border-b">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -389,7 +379,7 @@ export default function AdminReviews() {
               </div>
               
               <div>
-                 <ReviewFileUpload
+                 <ReviewBlobUpload
                    imageValue={formData.customerImage.url}
                    videoValue={formData.customerVideo.url}
                    onImageChange={(url) => {
@@ -570,7 +560,7 @@ export default function AdminReviews() {
               </div>
               
               <div>
-                 <ReviewFileUpload
+                 <ReviewBlobUpload
                    imageValue={formData.customerImage.url}
                    videoValue={formData.customerVideo.url}
                    onImageChange={(url) => {
@@ -808,6 +798,7 @@ export default function AdminReviews() {
           </CardContent>
         </Card>
       </main>
-    </div>
+      </div>
+    </AuthGuard>
   );
 }

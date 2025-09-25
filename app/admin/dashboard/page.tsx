@@ -28,6 +28,8 @@ import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import HeroBlobUpload from '@/components/HeroBlobUpload';
 import ImageUpload from '@/components/ImageUpload';
+import { useAuth } from '@/hooks/use-auth';
+import AuthGuard from '@/components/AuthGuard';
 
 interface HeroImage {
   _id: string;
@@ -70,7 +72,7 @@ interface AdminUser {
 }
 
 export default function AdminDashboard() {
-  const [user, setUser] = useState<User | null>(null);
+  const { user, logout, isAuthenticated, isLoading: authLoading } = useAuth();
   const [images, setImages] = useState<HeroImage[]>([]);
   const [banners, setBanners] = useState<PromotionBanner[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -102,35 +104,26 @@ export default function AdminDashboard() {
   });
   const router = useRouter();
 
-  // Verificar autenticación al cargar
+  // Redirigir si no está autenticado
   useEffect(() => {
-    checkAuth();
-    fetchImages();
-    fetchBanners();
-  }, []);
+    if (!authLoading && !isAuthenticated) {
+      router.push('/admin/login');
+      return;
+    }
+    
+    if (isAuthenticated) {
+      fetchImages();
+      fetchBanners();
+      setIsLoading(false);
+    }
+  }, [isAuthenticated, authLoading, router]);
 
   // Cargar usuarios cuando se selecciona la pestaña de usuarios
   useEffect(() => {
-    if (activeTab === 'users') {
+    if (activeTab === 'users' && isAuthenticated) {
       fetchUsers();
     }
-  }, [activeTab]);
-
-  const checkAuth = async () => {
-    try {
-      const response = await fetch('/api/auth/verify');
-      if (response.ok) {
-        const data = await response.json();
-        setUser(data.user);
-      } else {
-        router.push('/admin/login');
-      }
-    } catch (error) {
-      router.push('/admin/login');
-    } finally {
-      setIsLoading(false);
-    }
-  };
+  }, [activeTab, isAuthenticated]);
 
   const fetchImages = async () => {
     try {
@@ -157,12 +150,8 @@ export default function AdminDashboard() {
   };
 
   const handleLogout = async () => {
-    try {
-      await fetch('/api/auth/logout', { method: 'POST' });
-      router.push('/admin/login');
-    } catch (error) {
-      console.error('Error al cerrar sesión:', error);
-    }
+    await logout();
+    router.push('/admin/login');
   };
 
   // Funciones para gestión de usuarios
@@ -457,7 +446,8 @@ export default function AdminDashboard() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-50">
+    <AuthGuard>
+      <div className="min-h-screen bg-slate-50">
       {/* Header */}
       <header className="bg-white shadow-sm border-b">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -577,6 +567,14 @@ export default function AdminDashboard() {
                 <CardDescription>
                   Sube imágenes o videos para el carrusel del hero. Los archivos se subirán y guardarán automáticamente.
                 </CardDescription>
+                <Alert className="mt-4 border-blue-200 bg-blue-50">
+                  <ImageIcon className="h-4 w-4 text-blue-600" />
+                  <AlertDescription className="text-blue-700">
+                    <strong>💡 Tip:</strong> Para mejorar la velocidad de carga, te recomendamos convertir tus imágenes a formato WebP antes de subirlas. 
+                    Puedes usar herramientas online como <a href="https://convertio.co/es/jpg-webp/" target="_blank" rel="noopener noreferrer" className="underline hover:text-blue-800">Convertio</a> o 
+                    <a href="https://squoosh.app/" target="_blank" rel="noopener noreferrer" className="underline hover:text-blue-800">Squoosh</a> para convertir tus imágenes fácilmente.
+                  </AlertDescription>
+                </Alert>
               </CardHeader>
               <CardContent>
                 <div className="mb-4">
@@ -731,6 +729,14 @@ export default function AdminDashboard() {
                 <CardDescription>
                   Crea banners promocionales para mostrar entre el hero y la sección principal
                 </CardDescription>
+                <Alert className="mt-4 border-blue-200 bg-blue-50">
+                  <ImageIcon className="h-4 w-4 text-blue-600" />
+                  <AlertDescription className="text-blue-700">
+                    <strong>💡 Tip:</strong> Para mejorar la velocidad de carga, te recomendamos convertir tus imágenes a formato WebP antes de subirlas. 
+                    Puedes usar herramientas online como <a href="https://convertio.co/es/jpg-webp/" target="_blank" rel="noopener noreferrer" className="underline hover:text-blue-800">Convertio</a> o 
+                    <a href="https://squoosh.app/" target="_blank" rel="noopener noreferrer" className="underline hover:text-blue-800">Squoosh</a> para convertir tus imágenes fácilmente.
+                  </AlertDescription>
+                </Alert>
               </CardHeader>
               <CardContent>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -1065,6 +1071,7 @@ export default function AdminDashboard() {
           </>
         )}
       </main>
-    </div>
+      </div>
+    </AuthGuard>
   );
 }

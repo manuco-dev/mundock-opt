@@ -41,7 +41,7 @@ export async function POST(request: NextRequest) {
     admin.lastLogin = new Date();
     await admin.save();
 
-    // Crear JWT token
+    // Crear JWT token con expiración de 1 hora
     const token = jwt.sign(
       { 
         userId: admin._id,
@@ -49,13 +49,14 @@ export async function POST(request: NextRequest) {
         role: admin.role 
       },
       process.env.JWT_SECRET || 'fallback-secret',
-      { expiresIn: '24h' }
+      { expiresIn: '1h' }
     );
 
-    // Crear respuesta con cookie
+    // Crear respuesta con token en el body para localStorage
     const response = NextResponse.json(
       { 
         message: 'Login successful',
+        token: token, // Incluir token en el response para localStorage
         user: {
           id: admin._id,
           username: admin.username,
@@ -65,12 +66,12 @@ export async function POST(request: NextRequest) {
       { status: 200 }
     );
 
-    // Establecer cookie httpOnly
+    // Mantener cookie httpOnly como respaldo
     response.cookies.set('admin-token', token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
       sameSite: 'strict',
-      maxAge: 24 * 60 * 60 * 1000, // 24 horas
+      maxAge: 60 * 60 * 1000, // 1 hora
       path: '/'
     });
 
