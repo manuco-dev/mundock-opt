@@ -14,7 +14,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Switch } from '@/components/ui/switch';
 import { Label } from '@/components/ui/label';
 import { Checkbox } from '@/components/ui/checkbox';
-import PropertyImageUpload from '@/components/PropertyImageUpload';
+import PropertyBlobUpload from '@/components/PropertyBlobUpload';
 import EmbeddedGoogleMap, { extractEmbedUrl } from '@/components/EmbeddedGoogleMap';
 import { IProperty } from '@/lib/db/models/Property';
 import { Pencil, Trash2, Plus, Eye, Bed, Bath, Waves, Home } from 'lucide-react';
@@ -664,7 +664,7 @@ export default function AdminPropertiesPage() {
               
               <div>
                 <Label className="mb-2 block">Imágenes</Label>
-                <PropertyImageUpload 
+                <PropertyBlobUpload 
                   value={formData.images.map(img => img.url)} 
                   onChange={(urls) => {
                     // Convertir URLs a formato de imagen
@@ -675,8 +675,6 @@ export default function AdminPropertiesPage() {
                     const newImages = formData.images.filter(img => img.url !== url);
                     handleImageUpload(newImages);
                   }}
-                  useCloudinary={true}
-                  folder="properties"
                 />
               </div>
             </div>
@@ -917,7 +915,7 @@ export default function AdminPropertiesPage() {
               
               <div>
                 <Label className="mb-2 block">Imágenes</Label>
-                <PropertyImageUpload 
+                <PropertyBlobUpload 
                   value={formData.images.map(img => img.url)} 
                   onChange={(urls) => {
                     // Convertir URLs a formato de imagen
@@ -928,8 +926,6 @@ export default function AdminPropertiesPage() {
                     const newImages = formData.images.filter(img => img.url !== url);
                     handleImageUpload(newImages);
                   }}
-                  useCloudinary={true}
-                  folder="properties"
                 />
               </div>
             </div>
