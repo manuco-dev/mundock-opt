@@ -1,6 +1,9 @@
 'use client';
-import Image from "next/image";
-import { useState, useEffect } from "react";
+import Image from 'next/image';
+import { useState, useEffect } from 'react';
+import useTranslation from 'next-translate/useTranslation';
+import LanguageSelector from '../components/LanguageSelector';
+import LanguageDetector from '../components/LanguageDetector';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import PromotionBanners from '@/components/PromotionBanners';
@@ -18,6 +21,8 @@ interface HeroImage {
 }
 
 export default function Home() {
+  const { t } = useTranslation('home');
+  const { t: tCommon } = useTranslation('common');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [showFullAbout, setShowFullAbout] = useState(false);
   const [currentHeroSlide, setCurrentHeroSlide] = useState(0);
@@ -119,6 +124,9 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-white">
+      {/* Detector automático de idioma */}
+      <LanguageDetector />
+      
       {/* Premium Header */}
       <header className="fixed top-0 left-0 right-0 z-50 bg-white border-b border-gray-200 shadow-md" data-aos="fade-down">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -133,18 +141,19 @@ export default function Home() {
             
             {/* Desktop Navigation */}
             <nav className="hidden lg:flex space-x-8">
-              <a href="#inicio" className="text-dark-blue hover:text-gold transition-colors font-medium text-lg">Inicio</a>
-              <a href="/apartamentos" className="text-dark-blue hover:text-gold transition-colors font-medium text-lg">Apartamentos</a>
-              <a href="#transporte" className="text-dark-blue hover:text-gold transition-colors font-medium text-lg">Transporte</a>
-              <a href="/hotel" className="text-dark-blue hover:text-gold transition-colors font-medium text-lg">Hotel</a>
-              <a href="#sobre-nosotros" className="text-dark-blue hover:text-gold transition-colors font-medium text-lg">Sobre Nosotros</a>
-              <a href="#contacto" className="text-dark-blue hover:text-gold transition-colors font-medium text-lg">Contacto</a>
+              <a href="#inicio" className="text-dark-blue hover:text-gold transition-colors font-medium text-lg">{tCommon('nav.home')}</a>
+              <a href="/apartamentos" className="text-dark-blue hover:text-gold transition-colors font-medium text-lg">{tCommon('nav.apartments')}</a>
+              <a href="#transporte" className="text-dark-blue hover:text-gold transition-colors font-medium text-lg">{tCommon('nav.transport')}</a>
+              <a href="/hotel" className="text-dark-blue hover:text-gold transition-colors font-medium text-lg">{tCommon('nav.hotel')}</a>
+              <a href="#sobre-nosotros" className="text-dark-blue hover:text-gold transition-colors font-medium text-lg">{tCommon('nav.about')}</a>
+              <a href="#contacto" className="text-dark-blue hover:text-gold transition-colors font-medium text-lg">{tCommon('nav.contact')}</a>
             </nav>
             
             {/* Desktop Buttons */}
             <div className="hidden lg:flex items-center space-x-4">
+              <LanguageSelector />
               <a href="https://wa.me/573164032039?text=Hola,%20me%20interesa%20hacer%20una%20reserva%20en%20Mundo%20Vacacional%20CK" target="_blank" rel="noopener noreferrer" className="bg-gradient-to-r from-gold to-yellow-400 text-dark-blue font-bold py-2 px-6 rounded-lg hover:shadow-lg transition-all duration-300 transform hover:scale-105">
-                Reservar Ahora
+                {tCommon('buttons.reserveNow')}
               </a>
             </div>
             
@@ -169,15 +178,18 @@ export default function Home() {
           {isMenuOpen && (
             <div className="lg:hidden border-t border-gray-200">
               <div className="px-2 pt-2 pb-3 space-y-1 bg-white">
-                <a href="#inicio" className="block px-3 py-2 text-dark-blue hover:text-gold transition-colors font-medium border-t border-gray-100">Inicio</a>
-                <a href="/apartamentos" className="block px-3 py-2 text-dark-blue hover:text-gold transition-colors font-medium border-t border-gray-100">Apartamentos</a>
-                <a href="#transporte" className="block px-3 py-2 text-dark-blue hover:text-gold transition-colors font-medium border-t border-gray-100">Transporte</a>
-                <a href="/hotel" className="block px-3 py-2 text-dark-blue hover:text-gold transition-colors font-medium border-t border-gray-100">Hotel</a>
-                <a href="#sobre-nosotros" className="block px-3 py-2 text-dark-blue hover:text-gold transition-colors font-medium border-t border-gray-100">Sobre Nosotros</a>
-                <a href="#contacto" className="block px-3 py-2 text-dark-blue hover:text-gold transition-colors font-medium border-t border-gray-100">Contacto</a>
-                <div className="px-3 py-2 border-t border-gray-100">
+                <a href="#inicio" className="block px-3 py-2 text-dark-blue hover:text-gold transition-colors font-medium border-t border-gray-100">{tCommon('nav.home')}</a>
+                <a href="/apartamentos" className="block px-3 py-2 text-dark-blue hover:text-gold transition-colors font-medium border-t border-gray-100">{tCommon('nav.apartments')}</a>
+                <a href="#transporte" className="block px-3 py-2 text-dark-blue hover:text-gold transition-colors font-medium border-t border-gray-100">{tCommon('nav.transport')}</a>
+                <a href="/hotel" className="block px-3 py-2 text-dark-blue hover:text-gold transition-colors font-medium border-t border-gray-100">{tCommon('nav.hotel')}</a>
+                <a href="#sobre-nosotros" className="block px-3 py-2 text-dark-blue hover:text-gold transition-colors font-medium border-t border-gray-100">{tCommon('nav.about')}</a>
+                <a href="#contacto" className="block px-3 py-2 text-dark-blue hover:text-gold transition-colors font-medium border-t border-gray-100">{tCommon('nav.contact')}</a>
+                <div className="px-3 py-2 border-t border-gray-100 space-y-2">
+                  <div className="flex justify-center">
+                    <LanguageSelector />
+                  </div>
                   <a href="https://wa.me/573164032039?text=Hola,%20me%20interesa%20hacer%20una%20reserva%20en%20Mundo%20Vacacional%20CK" target="_blank" rel="noopener noreferrer" className="w-full bg-gradient-to-r from-gold to-yellow-400 text-dark-blue font-bold py-2 px-4 rounded-lg hover:shadow-lg transition-all duration-300 block text-center">
-                    Reservar Ahora
+                    {tCommon('buttons.reserveNow')}
                   </a>
                 </div>
               </div>
@@ -232,7 +244,7 @@ export default function Home() {
           )}
           {isLoadingHero && (
             <div className="w-full h-full bg-gray-800 flex items-center justify-center">
-              <div className="text-white text-xl">Cargando...</div>
+              <div className="text-white text-xl">{t('hero.loading')}</div>
             </div>
           )}
         </div>
@@ -241,7 +253,7 @@ export default function Home() {
         <button 
           onClick={prevHeroSlide}
           className="absolute left-4 top-1/2 transform -translate-y-1/2 z-20 bg-black/30 hover:bg-black/50 text-white p-3 rounded-full transition-all duration-300 backdrop-blur-sm"
-          aria-label="Slide anterior"
+          aria-label={t('hero.previousSlide')}
         >
           <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -251,7 +263,7 @@ export default function Home() {
         <button 
           onClick={nextHeroSlide}
           className="absolute right-4 top-1/2 transform -translate-y-1/2 z-20 bg-black/30 hover:bg-black/50 text-white p-3 rounded-full transition-all duration-300 backdrop-blur-sm"
-          aria-label="Siguiente slide"
+          aria-label={t('hero.nextSlide')}
         >
           <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
@@ -269,26 +281,25 @@ export default function Home() {
                   ? 'bg-yellow-400 scale-125' 
                   : 'bg-white/50 hover:bg-white/75'
               }`}
-              aria-label={`Ir al slide ${index + 1}`}
+              aria-label={t('hero.goToSlide', { number: index + 1 })}
             />
           ))}
         </div>
         <div className="relative z-10 text-center text-white px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold font-playfair-display mb-4 sm:mb-6 lg:mb-8" data-aos="fade-up">
-            Tu estadía soñada, <span className="text-yellow-400">fácil y segura</span>
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold font-playfair-display mb-4 sm:mb-6 lg:mb-8" data-aos="fade-up" dangerouslySetInnerHTML={{ __html: t('hero.title') }}>
           </h1>
           <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl mb-6 sm:mb-8 lg:mb-12 max-w-4xl mx-auto leading-relaxed" data-aos="fade-up" data-aos-delay="200">
-            Descubre tu próximo refugio en Cartagena. Apartamentos y casas fincas únicos diseñados para crear experiencias inolvidables.
+            {t('hero.subtitle')}
           </p>
           <p className="text-base sm:text-lg md:text-xl lg:text-2xl max-w-3xl mx-auto text-gray-200" data-aos="fade-up" data-aos-delay="400">
-            ¡Bienvenido a tu escapada perfecta donde cada momento se convierte en un recuerdo especial!
+            {t('hero.description')}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center mt-8 sm:mt-10 lg:mt-12" data-aos="fade-up" data-aos-delay="600">
             <a href="/apartamentos" className="bg-gradient-to-r from-gold to-yellow-400 text-dark-blue font-bold py-3 sm:py-4 px-6 sm:px-8 rounded-xl hover:shadow-lg transition-all duration-300 transform hover:scale-105 text-base sm:text-lg">
-              Ver Apartamentos
+              {t('hero.viewApartments')}
             </a>
             <a href="#transporte" className="bg-white/10 backdrop-blur-sm border border-white/20 text-white font-bold py-3 sm:py-4 px-6 sm:px-8 rounded-xl hover:bg-white/20 hover:shadow-lg transition-all duration-300 transform hover:scale-105 text-base sm:text-lg">
-              Reservar Van
+              {t('hero.reserveVan')}
             </a>
           </div>
         </div>
@@ -306,14 +317,14 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-8 sm:mb-12 lg:mb-16" data-aos="fade-up">
             <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold font-playfair-display text-slate-800 mb-3 tracking-tight">
-              Mundo Vacacional CK
+              {t('company.name')}
             </h2>
             <h3 className="text-2xl sm:text-3xl lg:text-4xl font-light font-playfair-display text-transparent bg-gradient-to-r from-amber-400 via-yellow-500 to-amber-600 bg-clip-text mb-6">
-              Tu Escape Perfecto en Cartagena
+              {t('company.tagline')}
             </h3>
             <div className="w-24 h-0.5 bg-gradient-to-r from-amber-400 to-yellow-500 mx-auto mb-8"></div>
             <p className="text-lg sm:text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
-              Descubre la magia de Cartagena con nuestros apartamentos exclusivos, casas finca con piscina y servicios de transporte premium
+              {t('company.description')}
             </p>
           </div>
           
@@ -324,7 +335,7 @@ export default function Home() {
               <div className="relative h-32 sm:h-40 lg:h-48 rounded-2xl overflow-hidden shadow-xl">
                 <Image 
                   src="/media/apto1.jpeg" 
-                  alt="Apartamento elegante - Mundo Vacacional CK" 
+                  alt={t('images.alt.elegantApartment')} 
                   layout="fill" 
                   objectFit="cover" 
                   className="hover:scale-105 transition-transform duration-300"
@@ -333,7 +344,7 @@ export default function Home() {
               <div className="relative h-32 sm:h-40 lg:h-48 rounded-2xl overflow-hidden shadow-xl">
                 <Image 
                   src="/media/apto 2.jpeg" 
-                  alt="Habitación confortable - Mundo Vacacional CK" 
+                  alt={t('images.alt.comfortableRoom')} 
                   layout="fill" 
                   objectFit="cover" 
                   className="hover:scale-105 transition-transform duration-300"
@@ -342,7 +353,7 @@ export default function Home() {
               <div className="relative h-32 sm:h-40 lg:h-48 rounded-2xl overflow-hidden shadow-xl">
                 <Image 
                   src="/media/apto3.jpeg" 
-                  alt="Espacio moderno - Mundo Vacacional CK" 
+                  alt={t('images.alt.modernSpace')} 
                   layout="fill" 
                   objectFit="cover" 
                   className="hover:scale-105 transition-transform duration-300"
@@ -352,7 +363,7 @@ export default function Home() {
               <div className="col-span-2 relative h-24 sm:h-32 lg:h-40 rounded-2xl overflow-hidden shadow-xl">
                 <Image 
                   src="/media/casafinca1.jpeg" 
-                  alt="Casa finca con piscina - Mundo Vacacional CK" 
+                  alt={t('images.alt.houseWithPool')} 
                   layout="fill" 
                   objectFit="cover" 
                   className="hover:scale-105 transition-transform duration-300"
@@ -361,7 +372,7 @@ export default function Home() {
               <div className="relative h-24 sm:h-32 lg:h-40 rounded-2xl overflow-hidden shadow-xl">
                 <Image 
                   src="/media/casafinca2.jpeg" 
-                  alt="Área de descanso - Casa finca" 
+                  alt={t('images.alt.restArea')} 
                   layout="fill" 
                   objectFit="cover" 
                   className="hover:scale-105 transition-transform duration-300"
@@ -388,20 +399,20 @@ export default function Home() {
                 
                 <div className="flex flex-col sm:flex-row gap-4">
                   <a 
-                    href="https://wa.me/573164032039?text=Hola,%20me%20interesa%20información%20sobre%20los%20apartamentos,%20casas%20finca%20con%20piscina%20y%20vans%20de%20Mundo%20Vacacional%20CK" 
+                    href={`https://wa.me/573164032039?text=${encodeURIComponent(t('whatsapp.apartmentInfo'))}`}
                     target="_blank" 
                     rel="noopener noreferrer"
                     className="inline-block bg-gradient-to-r from-gold to-yellow-400 text-dark-blue font-bold py-3 px-6 sm:px-8 rounded-xl hover:shadow-lg transition-all duration-300 transform hover:scale-105 text-center"
                   >
-                    Más Información
+                    {t('company.moreInfo')}
                   </a>
                   <a 
-                    href="https://wa.me/573164032039?text=Hola,%20quiero%20reservar%20apartamento,%20casa%20finca%20con%20piscina%20y/o%20van%20con%20Mundo%20Vacacional%20CK" 
+                    href={`https://wa.me/573164032039?text=${encodeURIComponent(t('whatsapp.reservation'))}`}
                     target="_blank" 
                     rel="noopener noreferrer"
                     className="inline-block border-2 border-dark-blue text-dark-blue font-bold py-3 px-6 sm:px-8 rounded-xl hover:bg-dark-blue hover:text-white transition-all duration-300 transform hover:scale-105 text-center"
                   >
-                    Reservar Ahora
+                    {t('company.reserve')}
                   </a>
                 </div>
               </div>
@@ -465,40 +476,40 @@ export default function Home() {
           
           <div className="bg-white rounded-2xl shadow-xl overflow-hidden p-6 sm:p-8 lg:p-10 max-w-4xl mx-auto" data-aos="fade-up">
             <p className="text-gray-600 mb-8 text-base sm:text-lg leading-relaxed">
-              Disfruta de un servicio de transporte exclusivo, cómodo y seguro para cada uno de tus trayectos. Contamos con vehículos modernos, con aire acondicionado y todas las comodidades para que tu experiencia sea placentera desde el primer momento.
+              {t('transport.description')}
             </p>
             
-            <h3 className="text-xl sm:text-2xl font-bold text-dark-blue mb-6">Ofrecemos:</h3>
+            <h3 className="text-xl sm:text-2xl font-bold text-dark-blue mb-6">{t('transport.offers')}</h3>
             
             <div className="space-y-4 mb-8">
               <div className="flex items-start space-x-3">
                 <span className="text-gold text-lg flex-shrink-0 mt-0.5">✓</span>
-                <p className="text-gray-700">Traslados desde y hacia el aeropuerto.</p>
+                <p className="text-gray-700">{t('transport.services.airport')}</p>
               </div>
               
               <div className="flex items-start space-x-3">
                 <span className="text-gold text-lg flex-shrink-0 mt-0.5">✓</span>
-                <p className="text-gray-700">Transporte privado para recorridos en Cartagena y alrededores.</p>
+                <p className="text-gray-700">{t('transport.services.private')}</p>
               </div>
               
               <div className="flex items-start space-x-3">
                 <span className="text-gold text-lg flex-shrink-0 mt-0.5">✓</span>
-                <p className="text-gray-700">Viajes personalizados a nivel nacional, para que llegues a tu destino en total tranquilidad.</p>
+                <p className="text-gray-700">{t('transport.services.national')}</p>
               </div>
             </div>
             
             <p className="text-gray-600 mb-8 text-base sm:text-lg leading-relaxed font-medium">
-              Nuestro compromiso es brindarte puntualidad, confort y la mejor atención en cada viaje.
+              {t('transport.commitment')}
             </p>
             
             <div className="flex justify-center">
               <a 
-                href="https://wa.me/573164032039?text=Hola,%20me%20interesa%20el%20servicio%20de%20transporte%20premium%20con%20Mundo%20Vacacional%20CK" 
+                href={`https://wa.me/573164032039?text=${encodeURIComponent(t('whatsapp.transport'))}`}
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="bg-gradient-to-r from-gold to-yellow-400 text-dark-blue font-bold py-3 px-8 rounded-xl hover:shadow-lg transition-all duration-300 transform hover:scale-105 inline-block text-center"
               >
-                Solicitar Información
+                {t('transport.requestInfo')}
               </a>
             </div>
           </div>
@@ -513,18 +524,18 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
             <div data-aos="fade-right">
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold font-playfair-display text-dark-blue mb-4">Sobre Nosotros</h2>
-              <h3 className="text-xl sm:text-2xl font-bold text-dark-blue mb-4">Tu Mejor Opción en Cartagena</h3>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold font-playfair-display text-dark-blue mb-4">{t('about.title')}</h2>
+              <h3 className="text-xl sm:text-2xl font-bold text-dark-blue mb-4">{t('about.subtitle')}</h3>
               <p className="text-gray-600 mb-4 text-base sm:text-lg leading-relaxed">
-                En MundovacacionalCk creemos que las mejores experiencias comienzan con un lugar acogedor donde descansar. Nos especializamos en ofrecer apartamentos turísticos en la ciudad de Cartagena, diseñados para brindar comodidad, limpieza y una atención cercana.
+                {t('about.description')}
               </p>
               {showFullAbout && (
                 <div className="transition-all duration-500 ease-in-out">
                   <p className="text-gray-600 mb-4 text-base sm:text-lg leading-relaxed">
-                    Nuestro propósito es que cada huésped disfrute de vacaciones inolvidables en la costa, combinando hospitalidad, tranquilidad y espacios equipados para sentirse como en casa.
+                    {t('about.purpose')}
                   </p>
                   <p className="text-gray-600 mb-4 text-base sm:text-lg leading-relaxed">
-                    Ponemos el corazón en cada detalle: desde la calidez en el servicio hasta la preparación de cada apartamento, porque sabemos que viajar es más que hospedarse: es vivir momentos únicos y especiales.
+                    {t('about.commitment')}
                   </p>
                 </div>
               )}
@@ -532,11 +543,11 @@ export default function Home() {
                 onClick={() => setShowFullAbout(!showFullAbout)}
                 className="inline-block bg-gradient-to-r from-gold to-yellow-400 text-dark-blue font-bold py-3 px-6 sm:px-8 rounded-xl hover:shadow-lg transition-all duration-300 transform hover:scale-105 mb-4 sm:mb-6"
               >
-                {showFullAbout ? 'Mostrar Menos' : 'Conoce Más'}
+                {showFullAbout ? t('about.showLess') : t('about.showMore')}
               </button>
             </div>
             <div className="relative h-64 sm:h-80 lg:h-96" data-aos="fade-left" data-aos-delay="200">
-              <Image src="/family_pool.webp" alt="familia disfrutando en resort - Mundo Vacacional CK" layout="fill" objectFit="cover" className="rounded-2xl shadow-xl" />
+              <Image src="/family_pool.webp" alt={t('images.alt.familyPool')} layout="fill" objectFit="cover" className="rounded-2xl shadow-xl" />
             </div>
           </div>
         </div>
@@ -546,27 +557,27 @@ export default function Home() {
       <section id="contacto" className="py-12 sm:py-16 lg:py-20 bg-gradient-to-b from-gray-50 to-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-8 sm:mb-12 lg:mb-16" data-aos="fade-up">
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold font-playfair-display text-dark-blue mb-4">Contáctanos</h2>
-            <p className="text-lg sm:text-xl text-gray-600 max-w-2xl mx-auto">Estamos aquí para hacer realidad tu experiencia perfecta</p>
-            <p className="text-base sm:text-lg text-gold font-semibold">⚡ Respondemos en menos de 10 minutos</p>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold font-playfair-display text-dark-blue mb-4">{t('contact.title')}</h2>
+            <p className="text-lg sm:text-xl text-gray-600 max-w-2xl mx-auto">{t('contact.subtitle')}</p>
+            <p className="text-base sm:text-lg text-gold font-semibold">{t('contact.responseTime')}</p>
           </div>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
             <div className="bg-white rounded-2xl shadow-xl p-4 sm:p-6 lg:p-8 flex flex-col items-center justify-center" data-aos="fade-right" data-aos-delay="200">
               <div className="mb-6">
                 <Image 
                   src="/media/asistente_vacacional_cartagena.webp" 
-                  alt="Asistente Vacacional Cartagena" 
+                  alt={t('images.alt.vacationalAssistant')} 
                   width={300} 
                   height={300} 
                   className="rounded-2xl shadow-lg w-full max-w-xs"
                 />
               </div>
               <div className="text-center mb-6">
-                <h3 className="text-xl sm:text-2xl font-bold text-dark-blue mb-2">¡Hablemos por WhatsApp!</h3>
-                <p className="text-gray-600 mb-4">Nuestro asistente virtual está listo para ayudarte</p>
+                <h3 className="text-xl sm:text-2xl font-bold text-dark-blue mb-2">{t('contact.whatsappTitle')}</h3>
+                <p className="text-gray-600 mb-4">{t('contact.whatsappDescription')}</p>
               </div>
               <a 
-                href="https://wa.me/573164032039?text=Hola,%20me%20interesa%20conocer%20más%20sobre%20sus%20servicios%20de%20hospedaje%20en%20Cartagena" 
+                href={`https://wa.me/573164032039?text=${encodeURIComponent(t('whatsapp.general'))}`}
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="bg-gradient-to-r from-green-500 to-green-600 text-white font-bold py-4 px-8 rounded-xl hover:shadow-lg transition-all duration-300 transform hover:scale-105 flex items-center gap-3"
@@ -574,24 +585,24 @@ export default function Home() {
                 <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/>
                 </svg>
-                Chatear en WhatsApp
+                {t('contact.chatWhatsapp')}
               </a>
             </div>
             <div className="space-y-6 lg:space-y-8" data-aos="fade-left" data-aos-delay="400">
               <div className="bg-white rounded-2xl shadow-xl p-4 sm:p-6 lg:p-8">
-                <h3 className="text-xl sm:text-2xl font-bold text-dark-blue mb-4 sm:mb-6">Información de Contacto</h3>
+                <h3 className="text-xl sm:text-2xl font-bold text-dark-blue mb-4 sm:mb-6">{t('contact.contactInfo')}</h3>
                 <div className="bg-gradient-to-r from-gold/10 to-yellow-100 border border-gold/20 rounded-lg p-3 mb-4">
                   <div className="text-dark-blue font-semibold text-center text-sm sm:text-base">
-                    <p className="mb-1">🕒 Horario de Atención:</p>
-                    <p className="text-xs sm:text-sm">Lunes a Viernes: 8:00 AM - 8:00 PM</p>
-                    <p className="text-xs sm:text-sm">Sábados: 8:00 AM - 6:00 PM</p>
-                    <p className="text-xs sm:text-sm">Domingos: 8:00 AM - 11:00 AM</p>
+                    <p className="mb-1">{t('contact.schedule.title')}</p>
+                    <p className="text-xs sm:text-sm">{t('contact.schedule.weekdays')}</p>
+                    <p className="text-xs sm:text-sm">{t('contact.schedule.saturday')}</p>
+                    <p className="text-xs sm:text-sm">{t('contact.schedule.sunday')}</p>
                   </div>
                 </div>
                 <div className="space-y-3 sm:space-y-4">
-                  <p className="text-gray-600 flex items-center text-sm sm:text-base"><span className="mr-3 text-gold text-lg">📞</span>+57 316 403 2039</p>
-                  <p className="text-gray-600 flex items-center text-sm sm:text-base"><span className="mr-3 text-gold text-lg">✉️</span>mundovacacionalck@gmail.com</p>
-                  <p className="text-gray-600 flex items-center text-sm sm:text-base"><span className="mr-3 text-gold text-lg">📍</span>Transversal 47 calle 22 #21-45 barrio la campiña, 130014 Cartagena de Indias</p>
+                  <p className="text-gray-600 flex items-center text-sm sm:text-base"><span className="mr-3 text-gold text-lg">📞</span>{t('contact.phone')}</p>
+                  <p className="text-gray-600 flex items-center text-sm sm:text-base"><span className="mr-3 text-gold text-lg">✉️</span>{t('contact.email')}</p>
+                  <p className="text-gray-600 flex items-center text-sm sm:text-base"><span className="mr-3 text-gold text-lg">📍</span>{t('contact.address')}</p>
                 </div>
               </div>
               <div className="h-48 sm:h-56 lg:h-64 rounded-2xl shadow-xl overflow-hidden">
@@ -603,7 +614,7 @@ export default function Home() {
                   allowFullScreen={true} 
                   loading="lazy" 
                   referrerPolicy="no-referrer-when-downgrade"
-                  title="Ubicación Mundo Vacacional CK"
+                  title={t('contact.mapTitle')}
                 ></iframe>
               </div>
             </div>
@@ -617,41 +628,41 @@ export default function Home() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 mb-8 sm:mb-12">
             <div className="sm:col-span-2 lg:col-span-1" data-aos="fade-up" data-aos-delay="200">
               <Image src="/logomundo.png" alt="Mundo Vacacional CK Logo" width={120} height={120} className="mb-4 w-20 h-20 sm:w-24 sm:h-24 lg:w-30 lg:h-30" />
-              <p className="text-gray-300 leading-relaxed text-sm sm:text-base">Tu mejor opción para hospedaje y transporte premium en Cartagena</p>
+              <p className="text-gray-300 leading-relaxed text-sm sm:text-base">{tCommon('footer.tagline')}</p>
             </div>
             <div data-aos="fade-up" data-aos-delay="400">
-              <h4 className="text-gold font-bold mb-4 sm:mb-6 text-base sm:text-lg">Enlaces Rápidos</h4>
+              <h4 className="text-gold font-bold mb-4 sm:mb-6 text-base sm:text-lg">{tCommon('footer.quickLinks')}</h4>
               <ul className="space-y-2 sm:space-y-3">
-                <li><a href="#inicio" className="text-gray-300 hover:text-gold transition-colors text-sm sm:text-base">Inicio</a></li>
-                <li><a href="/apartamentos" className="text-gray-300 hover:text-gold transition-colors text-sm sm:text-base">Apartamentos</a></li>
-                <li><a href="#transporte" className="text-gray-300 hover:text-gold transition-colors text-sm sm:text-base">Transporte</a></li>
-                <li><a href="#hotel" className="text-gray-300 hover:text-gold transition-colors text-sm sm:text-base">Hotel</a></li>
-                <li><a href="#sobre-nosotros" className="text-gray-300 hover:text-gold transition-colors text-sm sm:text-base">Sobre Nosotros</a></li>
-                <li><a href="#contacto" className="text-gray-300 hover:text-gold transition-colors text-sm sm:text-base">Contacto</a></li>
+                <li><a href="#inicio" className="text-gray-300 hover:text-gold transition-colors text-sm sm:text-base">{tCommon('nav.home')}</a></li>
+                <li><a href="/apartamentos" className="text-gray-300 hover:text-gold transition-colors text-sm sm:text-base">{tCommon('nav.apartments')}</a></li>
+                <li><a href="#transporte" className="text-gray-300 hover:text-gold transition-colors text-sm sm:text-base">{tCommon('nav.transport')}</a></li>
+                <li><a href="#hotel" className="text-gray-300 hover:text-gold transition-colors text-sm sm:text-base">{tCommon('nav.hotel')}</a></li>
+                <li><a href="#sobre-nosotros" className="text-gray-300 hover:text-gold transition-colors text-sm sm:text-base">{tCommon('nav.about')}</a></li>
+                <li><a href="#contacto" className="text-gray-300 hover:text-gold transition-colors text-sm sm:text-base">{tCommon('nav.contact')}</a></li>
               </ul>
             </div>
             <div data-aos="fade-up" data-aos-delay="600">
-              <h4 className="text-gold font-bold mb-4 sm:mb-6 text-base sm:text-lg">Contacto</h4>
+              <h4 className="text-gold font-bold mb-4 sm:mb-6 text-base sm:text-lg">{tCommon('footer.contact')}</h4>
               <ul className="space-y-2 sm:space-y-3 text-gray-300">
-                <li className="text-sm sm:text-base">📞 +57 316 403 2039</li>
-                <li className="text-sm sm:text-base">✉️ mundovacacionalck@gmail.com</li>
-                <li className="text-sm sm:text-base">📍 Transversal 47 calle 22 #21-45 barrio la campiña, 130014 Cartagena de Indias</li>
+                <li className="text-sm sm:text-base">📞 {t('contact.phone')}</li>
+                <li className="text-sm sm:text-base">✉️ {t('contact.email')}</li>
+                <li className="text-sm sm:text-base">📍 {t('contact.address')}</li>
               </ul>
             </div>
             <div data-aos="fade-up" data-aos-delay="800">
-              <h4 className="text-gold font-bold mb-4 sm:mb-6 text-base sm:text-lg">Síguenos</h4>
+              <h4 className="text-gold font-bold mb-4 sm:mb-6 text-base sm:text-lg">{tCommon('footer.followUs')}</h4>
               <div className="flex space-x-3 sm:space-x-4">
                 <a href="#" className="bg-white/10 hover:bg-gold hover:text-dark-blue p-2 sm:p-3 rounded-full transition-all duration-300 flex items-center justify-center">
-                  <Image src="/media/facebook-icon.svg" alt="Facebook" width={20} height={20} className="w-4 h-4 sm:w-5 sm:h-5" />
+                  <Image src="/media/facebook-icon.svg" alt={tCommon('social.facebook')} width={20} height={20} className="w-4 h-4 sm:w-5 sm:h-5" />
                 </a>
                 <a href="https://www.instagram.com/mundovacacionalck?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener noreferrer" className="bg-white/10 hover:bg-gold hover:text-dark-blue p-2 sm:p-3 rounded-full transition-all duration-300 flex items-center justify-center">
-                  <Image src="/media/instragram-icon.jpg" alt="Instagram" width={20} height={20} className="w-4 h-4 sm:w-5 sm:h-5 rounded" />
+                  <Image src="/media/instragram-icon.jpg" alt={tCommon('social.instagram')} width={20} height={20} className="w-4 h-4 sm:w-5 sm:h-5 rounded" />
                 </a>
               </div>
             </div>
           </div>
           <div className="border-t border-gray-700 pt-6 sm:pt-8 text-center">
-            <p className="text-gray-400 text-sm sm:text-base">© 2025 Mundo Vacacional. Todos los derechos reservados.</p>
+            <p className="text-gray-400 text-sm sm:text-base">{tCommon('footer.copyright')}</p>
           </div>
         </div>
       </footer>

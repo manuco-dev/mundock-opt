@@ -1,0 +1,32 @@
+{
+  "nav": {
+    "home": "Inicio",
+    "apartments": "Apartamentos",
+    "transport": "Transporte",
+    "hotel": "Hotel",
+    "about": "Sobre Nosotros",
+    "contact": "Contacto"
+  },
+  "buttons": {
+    "reserveNow": "Reservar Ahora",
+    "viewApartments": "Ver Apartamentos",
+    "reserveVan": "Reservar Van",
+    "moreInfo": "Más Información",
+    "requestInfo": "Solicitar Información"
+  },
+  "language": {
+    "spanish": "Español",
+    "english": "English"
+  },
+  "footer": {
+    "tagline": "Tu mejor opción para hospedaje y transporte premium en Cartagena",
+    "quickLinks": "Enlaces Rápidos",
+    "contact": "Contacto",
+    "followUs": "Síguenos",
+    "copyright": "© 2025 Mundo Vacacional. Todos los derechos reservados."
+  },
+  "social": {
+    "facebook": "Facebook",
+    "instagram": "Instagram"
+  }
+}

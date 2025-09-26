@@ -1,0 +1,104 @@
+{
+  "hero": {
+    "title": "Your dream stay, <span class=\"text-yellow-400\">easy and secure</span>",
+    "subtitle": "Discover your next refuge in Cartagena. Unique apartments and country houses designed to create unforgettable experiences.",
+    "description": "Welcome to your perfect getaway where every moment becomes a special memory!",
+    "viewApartments": "View Apartments",
+    "reserveVan": "Reserve Van",
+    "loading": "Loading...",
+    "previousSlide": "Previous slide",
+    "nextSlide": "Next slide",
+    "goToSlide": "Go to slide {{number}}"
+  },
+  "company": {
+    "name": "Mundo Vacacional CK",
+    "tagline": "Your Perfect Escape in Cartagena",
+    "description": "Discover the magic of Cartagena with our exclusive apartments, country houses with pool and premium transport services",
+    "experience": {
+      "title": "Discover the unique experience of Mundo Vacacional CK. Our apartments and country houses with pool offer you the comfort of home with the excitement of perfect vacations in Cartagena. Each space is designed to create unforgettable moments with spectacular views and environments that combine elegance and warmth.",
+      "transport": "Our van rental service allows you to explore Cartagena with total freedom. From colonial walls to paradisiacal beaches, travel in style and discover the most beautiful landscapes of the Colombian Caribbean. With us you invest in unforgettable experiences."
+    },
+    "moreInfo": "More Information",
+    "reserve": "Reserve Now"
+  },
+  "images": {
+    "alt": {
+      "elegantApartment": "Elegant apartment - Mundo Vacacional CK",
+      "comfortableRoom": "Comfortable room - Mundo Vacacional CK",
+      "modernSpace": "Modern space - Mundo Vacacional CK",
+      "houseWithPool": "Country house with pool - Mundo Vacacional CK",
+      "restArea": "Rest area - Country house",
+      "premiumVan": "Premium van for transport in Cartagena",
+      "luxuryVan": "Luxury van for city tours",
+      "comfortableTransport": "Comfortable and safe transport",
+      "modernVans": "Modern vans for your comfort",
+      "familyPool": "family enjoying at resort - Mundo Vacacional CK",
+      "vacationalAssistant": "Vacational Assistant Cartagena"
+    }
+  },
+  "transport": {
+    "title": "Premium Transport Tailored for You",
+    "subtitle": "Travel with comfort and style throughout Cartagena",
+    "description": "Enjoy an exclusive, comfortable and safe transport service for each of your journeys. We have modern vehicles, with air conditioning and all the amenities so that your experience is pleasant from the first moment.",
+    "offers": "We offer:",
+    "services": {
+      "airport": "Transfers to and from the airport.",
+      "private": "Private transport for tours in Cartagena and surroundings.",
+      "national": "Personalized national trips, so you reach your destination in total tranquility."
+    },
+    "commitment": "Our commitment is to provide you with punctuality, comfort and the best attention on every trip.",
+    "requestInfo": "Request Information"
+  },
+  "about": {
+    "title": "About Us",
+    "subtitle": "Your Best Option in Cartagena",
+    "description": "At MundovacacionalCk we believe that the best experiences begin with a cozy place to rest. We specialize in offering tourist apartments in the city of Cartagena, designed to provide comfort, cleanliness and close attention.",
+    "purpose": "Our purpose is for each guest to enjoy unforgettable vacations on the coast, combining hospitality, tranquility and spaces equipped to feel at home.",
+    "commitment": "We put our heart into every detail: from the warmth in service to the preparation of each apartment, because we know that traveling is more than staying: it's living unique and special moments.",
+    "showMore": "Learn More",
+    "showLess": "Show Less",
+    "reasons": {
+      "experience": {
+        "title": "Unique Experience",
+        "description": "More than 5 years creating unforgettable experiences in Cartagena"
+      },
+      "quality": {
+        "title": "Guaranteed Quality",
+        "description": "First-class apartments and vans with all services"
+      },
+      "location": {
+        "title": "Privileged Locations",
+        "description": "The best places in Cartagena at your fingertips"
+      },
+      "support": {
+        "title": "24/7 Support",
+        "description": "Complete support throughout your stay"
+      }
+    }
+  },
+  "contact": {
+    "title": "Contact Us",
+    "subtitle": "We are here to make your perfect experience come true",
+    "responseTime": "⚡ We respond in less than 10 minutes",
+    "whatsappTitle": "Let's talk on WhatsApp!",
+    "whatsappDescription": "Our virtual assistant is ready to help you",
+    "chatWhatsapp": "Chat on WhatsApp",
+    "contactInfo": "Contact Information",
+    "schedule": {
+      "title": "🕒 Business Hours:",
+      "weekdays": "Monday to Friday: 8:00 AM - 8:00 PM",
+      "saturday": "Saturdays: 8:00 AM - 6:00 PM",
+      "sunday": "Sundays: 8:00 AM - 11:00 AM"
+    },
+    "phone": "+57 316 403 2039",
+    "email": "mundovacacionalck@gmail.com",
+    "address": "Transversal 47 calle 22 #21-45 barrio la campiña, 130014 Cartagena de Indias",
+    "mapTitle": "Mundo Vacacional CK Location"
+  },
+  "whatsapp": {
+    "apartmentInfo": "Hello, I'm interested in information about apartments, country houses with pool and vans from Mundo Vacacional CK",
+    "reservation": "Hello, I want to reserve apartment, country house with pool and/or van with Mundo Vacacional CK",
+    "transport": "Hello, I'm interested in the premium transport service with Mundo Vacacional CK",
+    "general": "Hello, I'm interested in learning more about your accommodation services in Cartagena"
+  }
+}

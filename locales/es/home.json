@@ -1,0 +1,104 @@
+{
+  "hero": {
+    "title": "Tu estadía soñada, <span class=\"text-yellow-400\">fácil y segura</span>",
+    "subtitle": "Descubre tu próximo refugio en Cartagena. Apartamentos y casas fincas únicos diseñados para crear experiencias inolvidables.",
+    "description": "¡Bienvenido a tu escapada perfecta donde cada momento se convierte en un recuerdo especial!",
+    "viewApartments": "Ver Apartamentos",
+    "reserveVan": "Reservar Van",
+    "loading": "Cargando...",
+    "previousSlide": "Slide anterior",
+    "nextSlide": "Siguiente slide",
+    "goToSlide": "Ir al slide {{number}}"
+  },
+  "company": {
+    "name": "Mundo Vacacional CK",
+    "tagline": "Tu Escape Perfecto en Cartagena",
+    "description": "Descubre la magia de Cartagena con nuestros apartamentos exclusivos, casas finca con piscina y servicios de transporte premium",
+    "experience": {
+      "title": "Descubre la experiencia única de Mundo Vacacional CK. Nuestros apartamentos y casas finca con piscina te ofrecen la comodidad de un hogar con la emoción de unas vacaciones perfectas en Cartagena. Cada espacio está diseñado para crear momentos inolvidables con vistas espectaculares y ambientes que combinan elegancia y calidez.",
+      "transport": "Nuestro servicio de alquiler de vans te permite explorar Cartagena con total libertad. Desde las murallas coloniales hasta las playas paradisíacas, viaja con estilo y descubre los paisajes más hermosos del Caribe colombiano. Con nosotros inviertes en experiencias inolvidables."
+    },
+    "moreInfo": "Más Información",
+    "reserve": "Reservar Ahora"
+  },
+  "images": {
+    "alt": {
+      "elegantApartment": "Apartamento elegante - Mundo Vacacional CK",
+      "comfortableRoom": "Habitación confortable - Mundo Vacacional CK",
+      "modernSpace": "Espacio moderno - Mundo Vacacional CK",
+      "houseWithPool": "Casa finca con piscina - Mundo Vacacional CK",
+      "restArea": "Área de descanso - Casa finca",
+      "premiumVan": "Van premium para transporte en Cartagena",
+      "luxuryVan": "Van de lujo para city tours",
+      "comfortableTransport": "Transporte cómodo y seguro",
+      "modernVans": "Vans modernas para tu comodidad",
+      "familyPool": "familia disfrutando en resort - Mundo Vacacional CK",
+      "vacationalAssistant": "Asistente Vacacional Cartagena"
+    }
+  },
+  "transport": {
+    "title": "Transporte Premium a tu Medida",
+    "subtitle": "Viaja con comodidad y estilo por toda Cartagena",
+    "description": "Disfruta de un servicio de transporte exclusivo, cómodo y seguro para cada uno de tus trayectos. Contamos con vehículos modernos, con aire acondicionado y todas las comodidades para que tu experiencia sea placentera desde el primer momento.",
+    "offers": "Ofrecemos:",
+    "services": {
+      "airport": "Traslados desde y hacia el aeropuerto.",
+      "private": "Transporte privado para recorridos en Cartagena y alrededores.",
+      "national": "Viajes personalizados a nivel nacional, para que llegues a tu destino en total tranquilidad."
+    },
+    "commitment": "Nuestro compromiso es brindarte puntualidad, confort y la mejor atención en cada viaje.",
+    "requestInfo": "Solicitar Información"
+  },
+  "about": {
+    "title": "Sobre Nosotros",
+    "subtitle": "Tu Mejor Opción en Cartagena",
+    "description": "En MundovacacionalCk creemos que las mejores experiencias comienzan con un lugar acogedor donde descansar. Nos especializamos en ofrecer apartamentos turísticos en la ciudad de Cartagena, diseñados para brindar comodidad, limpieza y una atención cercana.",
+    "purpose": "Nuestro propósito es que cada huésped disfrute de vacaciones inolvidables en la costa, combinando hospitalidad, tranquilidad y espacios equipados para sentirse como en casa.",
+    "commitment": "Ponemos el corazón en cada detalle: desde la calidez en el servicio hasta la preparación de cada apartamento, porque sabemos que viajar es más que hospedarse: es vivir momentos únicos y especiales.",
+    "showMore": "Conoce Más",
+    "showLess": "Mostrar Menos",
+    "reasons": {
+      "experience": {
+        "title": "Experiencia Única",
+        "description": "Más de 5 años creando experiencias inolvidables en Cartagena"
+      },
+      "quality": {
+        "title": "Calidad Garantizada",
+        "description": "Apartamentos y vans de primera calidad con todos los servicios"
+      },
+      "location": {
+        "title": "Ubicaciones Privilegiadas",
+        "description": "Los mejores lugares de Cartagena al alcance de tu mano"
+      },
+      "support": {
+        "title": "Atención 24/7",
+        "description": "Soporte completo durante toda tu estadía"
+      }
+    }
+  },
+  "contact": {
+    "title": "Contáctanos",
+    "subtitle": "Estamos aquí para hacer realidad tu experiencia perfecta",
+    "responseTime": "⚡ Respondemos en menos de 10 minutos",
+    "whatsappTitle": "¡Hablemos por WhatsApp!",
+    "whatsappDescription": "Nuestro asistente virtual está listo para ayudarte",
+    "chatWhatsapp": "Chatear en WhatsApp",
+    "contactInfo": "Información de Contacto",
+    "schedule": {
+      "title": "🕒 Horario de Atención:",
+      "weekdays": "Lunes a Viernes: 8:00 AM - 8:00 PM",
+      "saturday": "Sábados: 8:00 AM - 6:00 PM",
+      "sunday": "Domingos: 8:00 AM - 11:00 AM"
+    },
+    "phone": "+57 316 403 2039",
+    "email": "mundovacacionalck@gmail.com",
+    "address": "Transversal 47 calle 22 #21-45 barrio la campiña, 130014 Cartagena de Indias",
+    "mapTitle": "Ubicación Mundo Vacacional CK"
+  },
+  "whatsapp": {
+    "apartmentInfo": "Hola, me interesa información sobre los apartamentos, casas finca con piscina y vans de Mundo Vacacional CK",
+    "reservation": "Hola, quiero reservar apartamento, casa finca con piscina y/o van con Mundo Vacacional CK",
+    "transport": "Hola, me interesa el servicio de transporte premium con Mundo Vacacional CK",
+    "general": "Hola, me interesa conocer más sobre sus servicios de hospedaje en Cartagena"
+  }
+}

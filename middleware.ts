@@ -7,6 +7,18 @@ export function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
+  // Manejar rutas de idioma
+  const pathname = request.nextUrl.pathname;
+  const pathnameIsMissingLocale = ['/es', '/en'].every(
+    (locale) => !pathname.startsWith(`${locale}/`) && pathname !== locale
+  );
+
+  // Si la ruta no tiene idioma y no es una ruta de admin o API, agregar idioma por defecto
+  if (pathnameIsMissingLocale && !pathname.startsWith('/admin') && !pathname.startsWith('/api') && !pathname.startsWith('/_next')) {
+    // Por defecto español, pero el LanguageDetector puede cambiar esto en el cliente
+    return NextResponse.next();
+  }
+
   // Solo aplicar middleware a rutas admin (excepto login)
   if (request.nextUrl.pathname.startsWith('/admin') && !request.nextUrl.pathname.startsWith('/admin/login')) {
     // Obtener token desde cookie o header Authorization
