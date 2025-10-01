@@ -2,6 +2,37 @@ import { NextRequest, NextResponse } from 'next/server';
 import dbConnect from '@/lib/db/mongodb';
 import Property from '@/lib/db/models/Property';
 import mongoose from 'mongoose';
+import jwt from 'jsonwebtoken';
+import AdminUser from '@/lib/db/models/AdminUser';
+
+// Verificar si el usuario es admin
+async function verifyAdmin(request: NextRequest) {
+  try {
+    let token = request.cookies.get('admin-token')?.value;
+    
+    if (!token) {
+      const authHeader = request.headers.get('Authorization');
+      if (authHeader && authHeader.startsWith('Bearer ')) {
+        token = authHeader.substring(7);
+      }
+    }
+    
+    if (!token) {
+      return null;
+    }
+
+    const decoded = jwt.verify(token, process.env.JWT_SECRET || 'fallback-secret') as any;
+    const user = await AdminUser.findById(decoded.userId);
+    
+    if (!user || !user.isActive) {
+      return null;
+    }
+
+    return user;
+  } catch (error) {
+    return null;
+  }
+}
 
 // GET /api/properties/[id] - Obtener una propiedad por ID
 export async function GET(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
@@ -52,8 +83,11 @@ export async function PUT(req: NextRequest, { params }: { params: Promise<{ id: 
       );
     }
     
-    // Verificar si el usuario es administrador (esto debe implementarse con autenticación)
-    // Por ahora, asumimos que la ruta está protegida por middleware
+    // Verificar si el usuario es administrador
+    const currentUser = await verifyAdmin(req);
+    if (!currentUser) {
+      return NextResponse.json({ error: 'No autorizado' }, { status: 401 });
+    }
     
     const data = await req.json();
     
@@ -95,8 +129,11 @@ export async function DELETE(req: NextRequest, { params }: { params: Promise<{ i
       );
     }
     
-    // Verificar si el usuario es administrador (esto debe implementarse con autenticación)
-    // Por ahora, asumimos que la ruta está protegida por middleware
+    // Verificar si el usuario es administrador
+    const currentUser = await verifyAdmin(req);
+    if (!currentUser) {
+      return NextResponse.json({ error: 'No autorizado' }, { status: 401 });
+    }
     
     const deletedProperty = await Property.findByIdAndDelete(id);
     
@@ -107,7 +144,14 @@ export async function DELETE(req: NextRequest, { params }: { params: Promise<{ i
       );
     }
     
-    return NextResponse.json({ success: true });
+    return NextResponse.json({ 
+      success: true, 
+      message: 'Propiedad eliminada correctamente',
+      deletedProperty: {
+        _id: deletedProperty._id,
+        title: deletedProperty.title
+      }
+    });
   } catch (error) {
     console.error('Error deleting property:', error);
     return NextResponse.json(

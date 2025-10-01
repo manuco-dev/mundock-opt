@@ -1,6 +1,37 @@
 import { NextRequest, NextResponse } from 'next/server';
 import dbConnect from '@/lib/db/mongodb';
 import Property, { IProperty } from '@/lib/db/models/Property';
+import jwt from 'jsonwebtoken';
+import AdminUser from '@/lib/db/models/AdminUser';
+
+// Verificar si el usuario es admin
+async function verifyAdmin(request: NextRequest) {
+  try {
+    let token = request.cookies.get('admin-token')?.value;
+    
+    if (!token) {
+      const authHeader = request.headers.get('Authorization');
+      if (authHeader && authHeader.startsWith('Bearer ')) {
+        token = authHeader.substring(7);
+      }
+    }
+    
+    if (!token) {
+      return null;
+    }
+
+    const decoded = jwt.verify(token, process.env.JWT_SECRET || 'fallback-secret') as any;
+    const user = await AdminUser.findById(decoded.userId);
+    
+    if (!user || !user.isActive) {
+      return null;
+    }
+
+    return user;
+  } catch (error) {
+    return null;
+  }
+}
 
 // GET /api/properties - Obtener todas las propiedades
 export async function GET(req: NextRequest) {
@@ -55,23 +86,18 @@ export async function POST(req: NextRequest) {
   try {
     await dbConnect();
     
-    // Verificar si el usuario es administrador (esto debe implementarse con autenticación)
-    // Por ahora, asumimos que la ruta está protegida por middleware
+    // Verificar si el usuario es administrador
+    const currentUser = await verifyAdmin(req);
+    if (!currentUser) {
+      return NextResponse.json({ error: 'No autorizado' }, { status: 401 });
+    }
     
     const data = await req.json();
     
-    // Validar datos requeridos
-    if (!data.title || !data.description || !data.type || !data.price || !data.location) {
-      return NextResponse.json(
-        { error: 'Faltan campos requeridos' },
-        { status: 400 }
-      );
-    }
+    const property = new Property(data);
+    await property.save();
     
-    // Crear nueva propiedad
-    const newProperty = await Property.create(data);
-    
-    return NextResponse.json(newProperty, { status: 201 });
+    return NextResponse.json(property, { status: 201 });
   } catch (error) {
     console.error('Error creating property:', error);
     return NextResponse.json(
