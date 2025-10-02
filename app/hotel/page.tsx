@@ -107,8 +107,9 @@ export default function HotelPage() {
                 <Image 
                   src="/hotel-placeholder.jpg" 
                   alt="Próximo Hotel en Cartagena" 
-                  layout="fill" 
-                  objectFit="cover"
+                  fill
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  style={{ objectFit: 'cover' }}
                   className="rounded-xl"
                   onError={(e) => {
                     // Fallback para cuando la imagen no existe

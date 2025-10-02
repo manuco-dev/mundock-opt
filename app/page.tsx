@@ -227,8 +227,9 @@ export default function Home() {
                 <Image 
                   src={'url' in currentSlides[currentHeroSlide] ? currentSlides[currentHeroSlide].url : currentSlides[currentHeroSlide].src} 
                   alt={'originalName' in currentSlides[currentHeroSlide] ? currentSlides[currentHeroSlide].originalName : currentSlides[currentHeroSlide].alt} 
-                  layout="fill" 
-                  objectFit="cover" 
+                  fill
+                  sizes="100vw"
+                  style={{ objectFit: 'cover' }}
                   className="brightness-50 transition-opacity duration-500" 
                 />
               ) : (
@@ -246,8 +247,9 @@ export default function Home() {
                 <Image 
                   src={fallbackHeroSlides[currentHeroSlide].src} 
                   alt={fallbackHeroSlides[currentHeroSlide].alt} 
-                  layout="fill" 
-                  objectFit="cover" 
+                  fill
+                  sizes="100vw"
+                  style={{ objectFit: 'cover' }}
                   className="brightness-50 transition-opacity duration-500" 
                 />
               ) : (
@@ -356,8 +358,9 @@ export default function Home() {
                 <Image 
                   src="/media/apto1.jpeg" 
                   alt="Apartamento elegante - Mundo Vacacional CK" 
-                  layout="fill" 
-                  objectFit="cover" 
+                  fill
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  style={{ objectFit: 'cover' }}
                   className="hover:scale-105 transition-transform duration-300"
                 />
               </div>
@@ -365,8 +368,9 @@ export default function Home() {
                 <Image 
                   src="/media/apto 2.jpeg" 
                   alt="Habitación confortable - Mundo Vacacional CK" 
-                  layout="fill" 
-                  objectFit="cover" 
+                  fill
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  style={{ objectFit: 'cover' }}
                   className="hover:scale-105 transition-transform duration-300"
                 />
               </div>
@@ -374,8 +378,9 @@ export default function Home() {
                 <Image 
                   src="/media/apto3.jpeg" 
                   alt="Espacio moderno - Mundo Vacacional CK" 
-                  layout="fill" 
-                  objectFit="cover" 
+                  fill
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  style={{ objectFit: 'cover' }}
                   className="hover:scale-105 transition-transform duration-300"
                 />
               </div>
@@ -384,8 +389,9 @@ export default function Home() {
                 <Image 
                   src="/media/casafinca1.jpeg" 
                   alt="Casa finca con piscina - Mundo Vacacional CK" 
-                  layout="fill" 
-                  objectFit="cover" 
+                  fill
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 66vw, 66vw"
+                  style={{ objectFit: 'cover' }}
                   className="hover:scale-105 transition-transform duration-300"
                 />
               </div>
@@ -393,8 +399,9 @@ export default function Home() {
                 <Image 
                   src="/media/casafinca2.jpeg" 
                   alt="Área de descanso - Casa finca" 
-                  layout="fill" 
-                  objectFit="cover" 
+                  fill
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 33vw, 33vw"
+                  style={{ objectFit: 'cover' }}
                   className="hover:scale-105 transition-transform duration-300"
                 />
               </div>
@@ -567,7 +574,7 @@ export default function Home() {
               </button>
             </div>
             <div className="relative h-64 sm:h-80 lg:h-96" data-aos="fade-left" data-aos-delay="200">
-              <Image src="/family_pool.webp" alt="familia disfrutando en resort - Mundo Vacacional CK" layout="fill" objectFit="cover" className="rounded-2xl shadow-xl" />
+              <Image src="/family_pool.webp" alt="familia disfrutando en resort - Mundo Vacacional CK" fill sizes="(max-width: 768px) 100vw, 50vw" style={{ objectFit: 'cover' }} className="rounded-2xl shadow-xl" />
             </div>
           </div>
         </div>
